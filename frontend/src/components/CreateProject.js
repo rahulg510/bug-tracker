@@ -3,16 +3,18 @@ import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import ErrorPage from "../pages/ErrorPage";
+import {useProjectsContext} from "../context/ProjectsContext"
 
 const CreateProject = () => {
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const { getAccessTokenSilently } = useAuth0();
+	const {fetchProjects, createNewProject, newProjectError, newProjectLoading} = useProjectsContext();
 
-	const createNewProject = async (e) => {
+	const newProject = async (e) => {
 		e.preventDefault();
 		try {
-			axios.post(
+			await axios.post(
 				process.env.REACT_APP_BASE_URL + "projects",
 				{
 					name,
@@ -24,6 +26,9 @@ const CreateProject = () => {
 					},
 				}
 			);
+			setName("");
+			setDescription("");
+			fetchProjects();
 		} catch (err) {
 			console.error(err);
 			return <ErrorPage />;

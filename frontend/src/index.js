@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { ProjectsProvider } from "./context/ProjectsContext";
 import config from "./auth_config.json";
 
 ReactDOM.render(
@@ -16,7 +17,9 @@ ReactDOM.render(
 			audience={config.audience}
 			scope={config.scope}
 		>
-			<App />
+			<ProjectsProvider>
+				<App />
+			</ProjectsProvider>
 		</Auth0Provider>
 	</React.StrictMode>,
 	document.getElementById("root")

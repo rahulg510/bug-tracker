@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors());
 app.use(jwtCheck);
-app.use(userInfo);
+// app.use(userInfo);
 //routes
 app.use("/users", usersRouter);
 app.use("/projects", projectsRouter);

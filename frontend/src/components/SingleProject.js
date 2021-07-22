@@ -1,5 +1,10 @@
-import React, {useState} from "react";
+import React, {useReducer} from "react";
 import styled from "styled-components";
+
+const initialState = {
+    name: "",
+    bugs: []
+}
 
 const SingleProject = () => {
 

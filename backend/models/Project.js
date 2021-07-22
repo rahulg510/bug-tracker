@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const ProjectSchema = mongoose.Schema(
 	{
-		name: { type: String, required: true, trim: true},
+		name: { type: String, required: true, trim: true },
 		bugs: [
 			{
 				type: mongoose.Schema.Types.ObjectId,
@@ -10,10 +10,10 @@ const ProjectSchema = mongoose.Schema(
 			},
 		],
 		owner: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "User",
-        },
-        description: {type:String}
+			type: String,
+			required: true,
+		},
+		description: { type: String },
 	},
 	{ timestamps: true }
 );

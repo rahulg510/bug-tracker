@@ -3,16 +3,16 @@ const User = require("../models/User");
 async function UserInfo(req, res, next) {
 	const userId = req.user.sub;
 	try {
-		let user = await User.findOne({ userId }).lean();
-		if (user) {
-			req.user.id = user._id;
-		} else {
-			let newUser = await User.create({
+		let user = await User.findOne({ userId }).populate('projects').lean();
+		if (!user) {
+			user = await User.create({
 				userId,
 				projects: [],
 			});
-			req.user.id = newUser._id;
 		}
+		console.log(user);
+		req.user.id = user._id;
+		req.user.projects = user.projects;
 	} catch (err) {
 		console.error(err);
 	}
