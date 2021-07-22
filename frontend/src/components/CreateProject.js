@@ -3,36 +3,22 @@ import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 import ErrorPage from "../pages/ErrorPage";
-import {useProjectsContext} from "../context/ProjectsContext"
+import { useProjectsContext } from "../context/ProjectsContext";
 
 const CreateProject = () => {
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
-	const { getAccessTokenSilently } = useAuth0();
-	const {fetchProjects, createNewProject, newProjectError, newProjectLoading} = useProjectsContext();
+	const {
+		createNewProject,
+		newProjectError,
+		newProjectLoading,
+	} = useProjectsContext();
 
 	const newProject = async (e) => {
 		e.preventDefault();
-		try {
-			await axios.post(
-				process.env.REACT_APP_BASE_URL + "projects",
-				{
-					name,
-					description,
-				},
-				{
-					headers: {
-						Authorization: `Bearer ${await getAccessTokenSilently()}`,
-					},
-				}
-			);
-			setName("");
-			setDescription("");
-			fetchProjects();
-		} catch (err) {
-			console.error(err);
-			return <ErrorPage />;
-		}
+		createNewProject({name,description});
+		setName("");
+		setDescription("");
 	};
 	return (
 		<Wrapper>
@@ -52,7 +38,7 @@ const CreateProject = () => {
 					value={description}
 					onChange={(e) => setDescription(e.target.value)}
 				/>
-				<button type="submit" onClick={createNewProject}>
+				<button type="submit" onClick={newProject}>
 					Submit
 				</button>
 			</form>

@@ -8,20 +8,22 @@ import {
     CREATE_NEW_PROJECT_BEGIN,
     CREATE_NEW_PROJECT_SUCCESS,
     CREATE_NEW_PROJECT_ERROR,
-} from "../actions";
+} from "../utils/actions";
 
 const ProjectsReducer = (state, action) => {
 	if (action.type === GET_PROJECTS_BEGIN) {
 		return {
 			...state,
-			projectsLoading: true,
+			allProjectsLoading: true,
+			allProjectsError: false
 		};
 	}
 
 	if (action.type === GET_PROJECTS_SUCCESS) {
 		return {
 			...state,
-			projectsLoading: false,
+			allProjectsLoading: false,
+			allProjectsError: false,
 			allProjects: [...action.payload],
 		};
 	}
@@ -29,8 +31,8 @@ const ProjectsReducer = (state, action) => {
 	if (action.type === GET_PROJECTS_ERROR) {
 		return {
 			...state,
-			projectsLoading: false,
-			projectsError: true,
+			allProjectsLoading: false,
+			allProjectsError: true,
 		};
 	}
 
@@ -56,6 +58,30 @@ const ProjectsReducer = (state, action) => {
 			...state,
 			currentProjectLoading: false,
 			currectProjectError: true,
+		};
+    }
+    
+    if (action.type === CREATE_NEW_PROJECT_BEGIN) {
+		return {
+			...state,
+            updateProjectLoading: true,
+            updateProjectError: false
+		};
+	}
+
+	if (action.type === CREATE_NEW_PROJECT_SUCCESS) {
+		return {
+			...state,
+			updateProjectLoading: false,
+            updateProjectError: false
+		};
+	}
+
+	if (action.type === CREATE_NEW_PROJECT_ERROR) {
+		return {
+			...state,
+			updateProjectLoading: false,
+            updateProjectError: true
 		};
 	}
 

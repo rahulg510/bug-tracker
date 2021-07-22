@@ -5,7 +5,6 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const bodyParser = require('body-parser');
 const jwtCheck = require("./config/auth0");
-const userInfo = require("./config/userInfo");
 const usersRouter = require("./routes/users");
 const projectsRouter = require("./routes/projects");
 
@@ -18,7 +17,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cors());
 app.use(jwtCheck);
-// app.use(userInfo);
+
 //routes
 app.use("/users", usersRouter);
 app.use("/projects", projectsRouter);

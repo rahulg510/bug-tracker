@@ -14,6 +14,7 @@ router.post("/", async (req, res) => {
 			description: req.body.description,
 			owner: req.user.sub,
 			bugs: [],
+			openBugs: 0
 		});
 
 		res.json(project);

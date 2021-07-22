@@ -23,14 +23,14 @@ const Navbar = () => {
 								<Link to="/bugs">Bugs</Link>
 							</li>
 							<li>
-								<Link onClick={logout}>Logout</Link>
+								<button onClick={logout}>Logout</button>
 							</li>
 						</div>
 					) : (
 						<li>
-							<Link onClick={loginWithRedirect}>
+							<button onClick={loginWithRedirect}>
 								Login/Sign up
-							</Link>
+							</button>
 						</li>
 					)}
 				</ul>

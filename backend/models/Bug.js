@@ -9,12 +9,16 @@ const BugSchema = mongoose.Schema(
 			type: String,
 			default: "OPEN",
 			enum: ["OPEN", "IN PROGRESS", "RESOLVED", "CLOSED"],
+			required: true
 		},
 		project: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "Project",
 			required: true,
 		},
+		sprint: {
+			type: String
+		}
 	},
 	{ timestamps: true }
 );
